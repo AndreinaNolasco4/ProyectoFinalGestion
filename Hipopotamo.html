@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="js/three.js"></script>
+    <script src="js/OrbitControls.js"></script>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+        // Textura cesped 
+
+        const texture = new THREE.TextureLoader().load('Texturas/cesped.jpg');
+
+
+        // cesped 
+
+        const geometryPlane = new THREE.PlaneGeometry(25, 25, 25);
+        const materialPlane = new THREE.MeshLambertMaterial({ map: texture, side: 2 });
+        const plane = new THREE.Mesh(geometryPlane, materialPlane);
+        scene.add(plane)
+        plane.rotateX(- Math.PI / 2);
+        plane.receiveShadow = true;
+        plane.position.y = -1;
+
+        // cuerpo 
+        
+        const cuerpoGeometry = new THREE.BoxGeometry(2, 1.5, 1.7);
+        const cuerpoMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const cuerpo = new THREE.Mesh(cuerpoGeometry, cuerpoMaterial);
+        scene.add(cuerpo);
+        cuerpo.position.y = 0.3;
+
+
+        // cabeza
+
+        const cabezaGeometry = new THREE.BoxGeometry(0.7, 1, 1);
+        const cabezaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const cabeza = new THREE.Mesh(cabezaGeometry, cabezaMaterial);
+        scene.add(cabeza);
+        cabeza.castShadow = true;
+        cabeza.position.y = 0.5;
+        cabeza .position.x = -1.3;
+
+        const orejaGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.3);
+        const orejaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+       
+        //oreja derecha 
+
+        const orejaDerecha = new THREE.Mesh(orejaGeometry, orejaMaterial);
+        scene.add(orejaDerecha);
+        orejaDerecha.position.set(-1.3, 1.1, -0.35);
+
+        //oreja izquierda
+
+        const orejaIzquierda = new THREE.Mesh(orejaGeometry, orejaMaterial);
+        scene.add(orejaIzquierda );
+        orejaIzquierda .position.set(-1.3, 1.1, 0.35);
+
+
+        // ojos 
+
+        const OjoGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+        const OjoMaterial = new THREE.MeshLambertMaterial({ color: 'black' });
+
+        //Ojo derecho 
+
+        const ojoDerecho = new THREE.Mesh(OjoGeometry, OjoMaterial);
+        scene.add(ojoDerecho);
+        ojoDerecho.position.set(-1.65, 0.75, -0.2);
+
+        // Ojo izquierdo
+
+        const ojoIzquierdo = new THREE.Mesh(OjoGeometry, OjoMaterial);
+        scene.add(ojoIzquierdo);
+        ojoIzquierdo.position.set(-1.65, 0.75, 0.2);
+       
+    
+        // Barbilla o menton 
+
+        const BarbillaGeometry = new THREE.BoxGeometry(0.7, 0.5, 1);
+        const BarbillaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const Barbilla = new THREE.Mesh(BarbillaGeometry, BarbillaMaterial);
+        scene.add(Barbilla);
+        Barbilla.position.set(-1.65, 0.25, 0);
+
+        //Nariz
+
+        const narizGeometry = new THREE.BoxGeometry(0.2, 0.35, 1);
+        const narizMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const nariz = new THREE.Mesh(narizGeometry, narizMaterial);
+        scene.add(nariz);
+        nariz.position.set(-2.1, 0.4, 0);
+
+        //Hocico
+
+        const HocicoGeometry = new THREE.BoxGeometry(0.7, 0.1, 1);
+        const HocicoMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const Hocico = new THREE.Mesh(HocicoGeometry, HocicoMaterial);
+        scene.add(Hocico);
+        Hocico.position.set(-1.85, 0, 0);
+
+    
+        //Dientes 
+
+        const DienteGeometry = new THREE.BoxGeometry(0.15, 0.1, 0.15);
+        const DienteMaterial = new THREE.MeshLambertMaterial({ color: '#f5dd85' });
+
+        // Diente derecho 
+
+        const DienteDerecho = new THREE.Mesh(DienteGeometry, DienteMaterial);
+        scene.add(DienteDerecho);
+        DienteDerecho.position.set(-2.15, 0.1, -0.3);
+
+        // Diente izquierdo
+
+        const DienteIzquierdo = new THREE.Mesh(DienteGeometry, DienteMaterial);
+        scene.add(DienteIzquierdo);
+        DienteIzquierdo.position.set(-2.15, 0.1, 0.3);
+     
+
+       // Orificios de la nariz 
+
+        const orificioNarizGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+        const orificioNarizMaterial = new THREE.MeshLambertMaterial({ color: '#6b2e09' });
+
+        //orificio derecho 
+
+        const orificioDerecho = new THREE.Mesh(orificioNarizGeometry, orificioNarizMaterial);
+        scene.add(orificioDerecho);
+        orificioDerecho.position.set(-2.17, 0.4, -0.3);
+
+        //orificio izquierdo 
+
+        const orificioIzquierdo = new THREE.Mesh(orificioNarizGeometry, orificioNarizMaterial);
+        scene.add(orificioIzquierdo);
+        orificioIzquierdo.position.set(-2.17, 0.4, 0.3);
+       
+        
+        //Patas 
+
+        const patasGeometry = new THREE.BoxGeometry(0.4, 1, 0.4);
+        const patasMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+
+        // patas delanteras 
+
+        const PataIzquierdaF= new THREE.Mesh(patasGeometry, patasMaterial);
+        const PataDerechaF = new THREE.Mesh(patasGeometry, patasMaterial);
+        PataIzquierdaF.position.set(-0.6, -0.5, 0.5);
+        PataDerechaF.position.set(-0.6, -0.5, -0.5);
+        scene.add(PataDerechaF);
+        scene.add(PataIzquierdaF);
+
+        //patas traseras 
+
+        const pataIzquierdaT = new THREE.Mesh(patasGeometry, patasMaterial);
+        const pataDerechaT = new THREE.Mesh(patasGeometry, patasMaterial);
+        scene.add(pataIzquierdaT);
+        scene.add(pataDerechaT);
+        pataIzquierdaT.position.set(1.2, -0.5, 0.5);
+        pataDerechaT.position.set(1.2, -0.5, -0.5);
+
+        //Nalguitas 
+
+        const NalguitaGeometry = new THREE.BoxGeometry(0.7, 1.3, 1.7);
+        const NalguitaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const Nalguita = new THREE.Mesh(NalguitaGeometry, NalguitaMaterial);
+        scene.add(Nalguita);
+        Nalguita.position.y = 0.2;
+        Nalguita.position.x = 1.3;
+
+        // Parte arriba nalguita 
+
+        const NalguitaArribaGeometry = new THREE.BoxGeometry(0.65, 1.3, 1.7);
+        const NalguitaArribaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const NalguitaArriba = new THREE.Mesh(NalguitaArribaGeometry, NalguitaArribaMaterial);
+        scene.add(NalguitaArriba);
+        NalguitaArriba.position.y = 0.34;
+        NalguitaArriba.position.x = 1.12;
+        NalguitaArriba.rotateZ(Math.PI /-10);
+
+        /// Luces en la escena
+
+        const spotLight = new THREE.PointLight(0xffffff, 2, 300);
+        spotLight.position.set(-30, 50, 50);
+        spotLight.angle = Math.PI / 4;
+        scene.add(spotLight);
+
+        /// Escena 
+
+        camera.position.z= 10;
+        camera.position.y= 5;
+        camera.position.x= -5;
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.update();
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+          
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</body>
+
+</html>
