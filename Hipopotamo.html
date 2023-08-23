@@ -41,15 +41,6 @@
         plane.receiveShadow = true;
         plane.position.y = -1;
 
-        // cuerpo 
-        
-        const cuerpoGeometry = new THREE.BoxGeometry(2, 1.5, 1.7);
-        const cuerpoMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
-        const cuerpo = new THREE.Mesh(cuerpoGeometry, cuerpoMaterial);
-        scene.add(cuerpo);
-        cuerpo.position.y = 0.3;
-
-
         // cabeza
 
         const cabezaGeometry = new THREE.BoxGeometry(0.7, 1, 1);
@@ -62,6 +53,14 @@
 
         const orejaGeometry = new THREE.BoxGeometry(0.2, 0.2, 0.3);
         const orejaMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+
+        // cuerpo 
+        
+        const cuerpoGeometry = new THREE.BoxGeometry(2, 1.5, 1.7);
+        const cuerpoMaterial = new THREE.MeshLambertMaterial({ color: '#ba6838' });
+        const cuerpo = new THREE.Mesh(cuerpoGeometry, cuerpoMaterial);
+        scene.add(cuerpo);
+        cuerpo.position.y = 0.3;
        
         //oreja derecha 
 
